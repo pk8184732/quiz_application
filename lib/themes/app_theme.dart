@@ -40,7 +40,7 @@ class AppTheme {
         actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       // Scaffold theme
-      scaffoldBackgroundColor:darkRed,
+      scaffoldBackgroundColor:Colors.white,
 
       // Button themes
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -301,7 +301,7 @@ class ThemeController extends GetxController {
   static ThemeController get instance => Get.find<ThemeController>();
 
   // Observable for theme mode
-  final _isDarkMode = false.obs;
+  final _isDarkMode = true.obs;
 
   // Getter for current theme mode
   bool get isDarkMode => _isDarkMode.value;
