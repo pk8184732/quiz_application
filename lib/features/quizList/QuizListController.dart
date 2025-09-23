@@ -115,8 +115,5 @@ class QuizListController extends GetxController {
     applyFilters();
   }
 
-  void startQuiz(String quizId) {
-    final quiz = allQuizzes.firstWhere((q) => q.id == quizId);
-    Get.toNamed('/quiz-detail', arguments: {'quiz': quiz});
-  }
+
 }

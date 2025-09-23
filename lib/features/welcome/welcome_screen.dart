@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
                   'Quizify',
                   textStyle: colorizeTextStyle,
                   colors: colorizeColors,
-                  speed: Duration(milliseconds: 1000),
+                  speed: Duration(milliseconds: 500),
                 ),
               ],
               totalRepeatCount: 1,
@@ -38,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 // colors
-const colorizeColors = [Colors.purple, Colors.blue, Colors.yellow, Colors.red];
+const colorizeColors = [Colors.white, Colors.purple, Colors.yellow, Colors.red];
 
 // font style
 const colorizeTextStyle = TextStyle(

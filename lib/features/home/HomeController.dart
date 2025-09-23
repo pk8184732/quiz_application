@@ -123,42 +123,42 @@ class HomeController extends GetxController {
     ]);
 
     // Create sample questions with model classes
-    List<QuestionModel> generalQuestions = [
-      QuestionModel(
-        id: "q1",
-        question: "What is the capital of France?",
-        type: QuestionType.multipleChoice,
-        options: [
-          QuestionOption(id: "opt1", text: "London", isCorrect: false),
-          QuestionOption(id: "opt2", text: "Berlin", isCorrect: false),
-          QuestionOption(id: "opt3", text: "Paris", isCorrect: true),
-          QuestionOption(id: "opt4", text: "Madrid", isCorrect: false),
-        ],
-        correctAnswer: "Paris",
-        explanation: "Paris is the capital and largest city of France.",
-        points: 10,
-        timeLimit: 30,
-        difficulty: "Easy",
-        tags: ["Geography", "Europe"],
-      ),
-      QuestionModel(
-        id: "q2",
-        question: "Which planet is closest to the Sun?",
-        type: QuestionType.multipleChoice,
-        options: [
-          QuestionOption(id: "opt1", text: "Venus", isCorrect: false),
-          QuestionOption(id: "opt2", text: "Mercury", isCorrect: true),
-          QuestionOption(id: "opt3", text: "Earth", isCorrect: false),
-          QuestionOption(id: "opt4", text: "Mars", isCorrect: false),
-        ],
-        correctAnswer: "Mercury",
-        explanation: "Mercury is the smallest planet and closest to the Sun.",
-        points: 10,
-        timeLimit: 30,
-        difficulty: "Easy",
-        tags: ["Space", "Astronomy"],
-      ),
-    ];
+    // List<QuestionModel> generalQuestions = [
+    //   QuestionModel(
+    //     id: "q1",
+    //     question: "What is the capital of France?",
+    //     type: QuestionType.multipleChoice,
+    //     options: [
+    //       QuestionOption(id: "opt1", text: "London", isCorrect: false),
+    //       QuestionOption(id: "opt2", text: "Berlin", isCorrect: false),
+    //       QuestionOption(id: "opt3", text: "Paris", isCorrect: true),
+    //       QuestionOption(id: "opt4", text: "Madrid", isCorrect: false),
+    //     ],
+    //     correctAnswer: "Paris",
+    //     explanation: "Paris is the capital and largest city of France.",
+    //     points: 10,
+    //     timeLimit: 30,
+    //     difficulty: "Easy",
+    //     tags: ["Geography", "Europe"],
+    //   ),
+    //   QuestionModel(
+    //     id: "q2",
+    //     question: "Which planet is closest to the Sun?",
+    //     type: QuestionType.multipleChoice,
+    //     options: [
+    //       QuestionOption(id: "opt1", text: "Venus", isCorrect: false),
+    //       QuestionOption(id: "opt2", text: "Mercury", isCorrect: true),
+    //       QuestionOption(id: "opt3", text: "Earth", isCorrect: false),
+    //       QuestionOption(id: "opt4", text: "Mars", isCorrect: false),
+    //     ],
+    //     correctAnswer: "Mercury",
+    //     explanation: "Mercury is the smallest planet and closest to the Sun.",
+    //     points: 10,
+    //     timeLimit: 30,
+    //     difficulty: "Easy",
+    //     tags: ["Space", "Astronomy"],
+    //   ),
+    // ];
 
     List<QuestionModel> scienceQuestions = [
       QuestionModel(
@@ -200,6 +200,153 @@ class HomeController extends GetxController {
         tags: ["Addition", "Basic"],
       ),
     ];
+
+    List<QuestionModel> generalQuestions = [
+      // 1. Multiple Choice
+      QuestionModel(
+        id: "q1",
+        question: "What is the capital of France?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "London", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Berlin", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Paris", isCorrect: true),
+          QuestionOption(id: "opt4", text: "Madrid", isCorrect: false),
+        ],
+        correctAnswer: "Paris",
+        explanation: "Paris is the capital and largest city of France.",
+        points: 10,
+        timeLimit: 30,
+        difficulty: "Easy",
+        tags: ["Geography", "Europe"],
+      ),
+      // 2. True/False
+      QuestionModel(
+        id: "q2",
+        question: "The Great Wall of China is visible from the Moon.",
+        type: QuestionType.trueFalse,
+        options: [
+          QuestionOption(id: "opt1", text: "True", isCorrect: false),
+          QuestionOption(id: "opt2", text: "False", isCorrect: true),
+        ],
+        correctAnswer: "False",
+        explanation: "The Great Wall is not visible from the Moon with the naked eye.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Geography", "Fact"],
+      ),
+
+
+      // 4. Image Choice
+      QuestionModel(
+        id: "q4",
+        question: "Identify the landmark in the image.",
+        type: QuestionType.imageChoice,
+        questionImageUrl: "https://example.com/eiffel_tower.jpg",
+        options: [
+          QuestionOption(
+              id: "opt1",
+              text: "Statue of Liberty",
+              imageUrl: "https://example.com/statue_liberty.jpg",
+              isCorrect: false),
+          QuestionOption(
+              id: "opt2",
+              text: "Eiffel Tower",
+              imageUrl: "https://example.com/eiffel_tower.jpg",
+              isCorrect: true),
+          QuestionOption(
+              id: "opt3",
+              text: "Big Ben",
+              imageUrl: "https://example.com/big_ben.jpg",
+              isCorrect: false),
+        ],
+        correctAnswer: "Eiffel Tower",
+        explanation: "The image shows the Eiffel Tower in Paris, France.",
+        points: 20,
+        timeLimit: 30,
+        difficulty: "Medium",
+        tags: ["Landmark", "Image"],
+      ),
+      // 5. Image Question
+      QuestionModel(
+        id: "q5",
+        question: "Which country's flag is shown?",
+        type: QuestionType.imageQuestion,
+        questionImageUrl: "https://example.com/japan_flag.png",
+        options: [
+          QuestionOption(id: "opt1", text: "Japan", isCorrect: true),
+          QuestionOption(id: "opt2", text: "China", isCorrect: false),
+          QuestionOption(id: "opt3", text: "South Korea", isCorrect: false),
+        ],
+        correctAnswer: "Japan",
+        explanation: "The flag with a red circle on white background is Japan's flag.",
+        points: 15,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Flag", "Image"],
+      ),
+      // 6-10: Add similar questions to fill up 10 questions per category
+      QuestionModel(
+        id: "q6",
+        question: "Which continent is known as the 'Dark Continent'?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Africa", isCorrect: true),
+          QuestionOption(id: "opt2", text: "Asia", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Europe", isCorrect: false),
+          QuestionOption(id: "opt4", text: "South America", isCorrect: false),
+        ],
+        correctAnswer: "Africa",
+        explanation: "Africa was historically called the 'Dark Continent'.",
+        points: 10,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Geography", "Continent"],
+      ),
+
+      QuestionModel(
+        id: "q8",
+        question: "The Statue of Liberty is located in New York.",
+        type: QuestionType.trueFalse,
+        options: [
+          QuestionOption(id: "opt1", text: "True", isCorrect: true),
+          QuestionOption(id: "opt2", text: "False", isCorrect: false),
+        ],
+        correctAnswer: "True",
+        explanation: "The Statue of Liberty is in New York Harbor, USA.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Landmark", "Fact"],
+      ),
+      QuestionModel(
+        id: "q9",
+        question: "Identify the animal in the image.",
+        type: QuestionType.imageChoice,
+        questionImageUrl: "https://example.com/lion.jpg",
+        options: [
+          QuestionOption(
+              id: "opt1",
+              text: "Tiger",
+              imageUrl: "https://example.com/tiger.jpg",
+              isCorrect: false),
+          QuestionOption(
+              id: "opt2",
+              text: "Lion",
+              imageUrl: "https://example.com/lion.jpg",
+              isCorrect: true),
+        ],
+        correctAnswer: "Lion",
+        explanation: "The image shows a Lion.",
+        points: 15,
+        timeLimit: 20,
+        difficulty: "Medium",
+        tags: ["Animals", "Image"],
+      ),
+
+    ];
+
 
     // Initialize quizzes with model classes
     quizzes.addAll([

@@ -34,13 +34,13 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: darkRed,
         foregroundColor: Colors.white,
-        elevation: 2,
+        elevation: 0,
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       // Scaffold theme
-      scaffoldBackgroundColor:Colors.white,
+      scaffoldBackgroundColor:darkRed,
 
       // Button themes
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -164,9 +164,9 @@ class AppTheme {
 
       // AppBar theme
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF1E1E1E),
+        backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        elevation: 2,
+        elevation: 0,
         centerTitle: true,
         iconTheme: IconThemeData(color: darkRed),
         actionsIconTheme: IconThemeData(color: darkRed),
@@ -301,7 +301,7 @@ class ThemeController extends GetxController {
   static ThemeController get instance => Get.find<ThemeController>();
 
   // Observable for theme mode
-  final _isDarkMode = true.obs;
+  final _isDarkMode = false.obs;
 
   // Getter for current theme mode
   bool get isDarkMode => _isDarkMode.value;
