@@ -73,53 +73,80 @@ class QuizResultScreen extends StatelessWidget {
             const SizedBox(height: 12),
 
             // Actions grid
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            //   child: GridView(
+            //     shrinkWrap: true,
+            //     physics: const NeverScrollableScrollPhysics(),
+            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //       crossAxisCount: 3,
+            //       crossAxisSpacing: 12,
+            //       mainAxisSpacing: 12,
+            //       childAspectRatio: 1.1,
+            //     ),
+            //     children: [
+            //       IconAction(
+            //         icon: Icons.refresh_rounded,
+            //         label: 'Play Again',
+            //         onTap: () => Get.offNamed('/quiz-play', arguments: quiz),
+            //       ),
+            //       IconAction(
+            //         icon: Icons.visibility_rounded,
+            //         label: 'Review Answer',
+            //         onTap: () {},
+            //       ),
+            //       IconAction(
+            //         icon: Icons.share_rounded,
+            //         label: 'Share Score',
+            //         onTap: () {},
+            //       ),
+            //       IconAction(
+            //         icon: Icons.picture_as_pdf_rounded,
+            //         label: 'Generate PDF',
+            //         onTap: () {},
+            //       ),
+            //       IconAction(
+            //         icon: Icons.home_rounded,
+            //         label: 'Home',
+            //         onTap: () => Get.offAllNamed('/home'),
+            //       ),
+            //       IconAction(
+            //         icon: Icons.emoji_events_rounded,
+            //         label: 'Leaderboard',
+            //         onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: GridView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.1,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              child: Row(
                 children: [
-                  IconAction(
-                    icon: Icons.refresh_rounded,
-                    label: 'Play Again',
-                    onTap: () => Get.offNamed('/quiz-play', arguments: quiz),
+                  Expanded(
+                    child: SizedBox(
+                      height: 90,
+                      child: IconAction(
+                        icon: Icons.home_rounded,
+                        label: 'Home',
+                        onTap: () => Get.offAllNamed('/home'),
+                      ),
+                    ),
                   ),
-                  IconAction(
-                    icon: Icons.visibility_rounded,
-                    label: 'Review Answer',
-                    onTap: () {},
-                  ),
-                  IconAction(
-                    icon: Icons.share_rounded,
-                    label: 'Share Score',
-                    onTap: () {},
-                  ),
-                  IconAction(
-                    icon: Icons.picture_as_pdf_rounded,
-                    label: 'Generate PDF',
-                    onTap: () {},
-                  ),
-                  IconAction(
-                    icon: Icons.home_rounded,
-                    label: 'Home',
-                    onTap: () => Get.offAllNamed('/home'),
-                  ),
-                  IconAction(
-                    icon: Icons.emoji_events_rounded,
-                    label: 'Leaderboard',
-                    onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+                  SizedBox(width: 20,),
+                  Expanded(
+                    child: SizedBox(
+                      height: 90,
+                      child: IconAction(
+                        icon: Icons.emoji_events_rounded,
+                        label: 'Leaderboard',
+                        onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
 
-            const Spacer(),
           ],
         ),
       ),
