@@ -113,56 +113,6 @@ class QuizModel {
     return null;
   }
 
-  QuizModel copyWith({
-    String? id,
-    String? title,
-    String? subtitle,
-    String? description,
-    String? type,
-    Color? color,
-    String? duration,
-    String? difficulty,
-    String? category,
-    double? rating,
-    int? attempts,
-    String? price,
-    String? imageUrl,
-    List<String>? tags,
-    bool? isCompleted,
-    int? bestScore,
-    String? lastAttempt,
-    List<QuestionModel>? questions,
-    int? passingScore,
-    bool? isActive,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) {
-    return QuizModel(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
-      description: description ?? this.description,
-      type: type ?? this.type,
-      color: color ?? this.color,
-      duration: duration ?? this.duration,
-      difficulty: difficulty ?? this.difficulty,
-      category: category ?? this.category,
-      rating: rating ?? this.rating,
-      attempts: attempts ?? this.attempts,
-      price: price ?? this.price,
-      imageUrl: imageUrl ?? this.imageUrl,
-      tags: tags ?? this.tags,
-      isCompleted: isCompleted ?? this.isCompleted,
-      bestScore: bestScore ?? this.bestScore,
-      lastAttempt: lastAttempt ?? this.lastAttempt,
-      questions: questions ?? this.questions,
-      passingScore: passingScore ?? this.passingScore,
-      isActive: isActive ?? this.isActive,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-    );
-  }
-
   // Computed properties
   bool get isPremium => type == "PREMIUM";
   bool get isFree => type == "FREE";

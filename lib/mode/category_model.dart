@@ -81,38 +81,6 @@ class CategoryModel {
     return null;
   }
 
-  CategoryModel copyWith({
-    String? id,
-    String? name,
-    String? description,
-    String? imageUrl,
-    Color? color,
-    List<QuizModel>? quizzes,
-    bool? isActive,
-    int? totalQuizzes,
-    int? completedQuizzes,
-    int? totalQuestions,
-    int? totalPoints,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) {
-    return CategoryModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      imageUrl: imageUrl ?? this.imageUrl,
-      type: type ?? this.type,
-      color: color ?? this.color,
-      quizzes: quizzes ?? this.quizzes,
-      isActive: isActive ?? this.isActive,
-      totalQuizzes: totalQuizzes ?? this.totalQuizzes,
-      completedQuizzes: completedQuizzes ?? this.completedQuizzes,
-      totalQuestions: totalQuestions ?? this.totalQuestions, // ADDED
-      totalPoints: totalPoints ?? this.totalPoints,         // ADDED
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-    );
-  }
 
   // Computed properties
   double get completionPercentage =>
