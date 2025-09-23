@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_application/features/bg/bg.dart';
 import '../../mode/quiz_model.dart';
 import '../../mode/question_model.dart';
 import '../../routes/app_routes.dart';
@@ -33,122 +34,128 @@ class QuizResultScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // App bar row
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  _GlassIconButton(
-                    icon: Icons.arrow_back,
-                    onTap: () => Get.offAllNamed('/home'),
-                  ),
-                  const Spacer(),
-                  _GlassIconButton(
-                    icon: Icons.more_horiz,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
+      body: Stack(
 
-            // Score ring
-            const SizedBox(height: 8),
-            _ScoreRing(
-              score: totalScore,
-              completion: completion,
-              color: Colors.amber,
-            ),
-            const SizedBox(height: 18),
-
-            // Stats card
-            _StatsCard(
-              completionPct: (completion * 100).round(),
-              total: totalQuestions,
-              correct: correct,
-              wrong: wrong,
-            ),
-            const SizedBox(height: 12),
-
-            // Actions grid
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            //   child: GridView(
-            //     shrinkWrap: true,
-            //     physics: const NeverScrollableScrollPhysics(),
-            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: 3,
-            //       crossAxisSpacing: 12,
-            //       mainAxisSpacing: 12,
-            //       childAspectRatio: 1.1,
-            //     ),
-            //     children: [
-            //       IconAction(
-            //         icon: Icons.refresh_rounded,
-            //         label: 'Play Again',
-            //         onTap: () => Get.offNamed('/quiz-play', arguments: quiz),
-            //       ),
-            //       IconAction(
-            //         icon: Icons.visibility_rounded,
-            //         label: 'Review Answer',
-            //         onTap: () {},
-            //       ),
-            //       IconAction(
-            //         icon: Icons.share_rounded,
-            //         label: 'Share Score',
-            //         onTap: () {},
-            //       ),
-            //       IconAction(
-            //         icon: Icons.picture_as_pdf_rounded,
-            //         label: 'Generate PDF',
-            //         onTap: () {},
-            //       ),
-            //       IconAction(
-            //         icon: Icons.home_rounded,
-            //         label: 'Home',
-            //         onTap: () => Get.offAllNamed('/home'),
-            //       ),
-            //       IconAction(
-            //         icon: Icons.emoji_events_rounded,
-            //         label: 'Leaderboard',
-            //         onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 90,
-                      child: IconAction(
-                        icon: Icons.home_rounded,
-                        label: 'Home',
+        children: [
+          PurpleBackground(),
+          SafeArea(
+            child: Column(
+              children: [
+                // App bar row
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    children: [
+                      _GlassIconButton(
+                        icon: Icons.arrow_back,
                         onTap: () => Get.offAllNamed('/home'),
                       ),
-                    ),
-                  ),
-                  SizedBox(width: 20,),
-                  Expanded(
-                    child: SizedBox(
-                      height: 90,
-                      child: IconAction(
-                        icon: Icons.emoji_events_rounded,
-                        label: 'Leaderboard',
-                        onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+                      const Spacer(),
+                      _GlassIconButton(
+                        icon: Icons.more_horiz,
+                        onTap: () {},
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
 
-          ],
-        ),
+                // Score ring
+                const SizedBox(height: 20),
+                _ScoreRing(
+                  score: totalScore,
+                  completion: completion,
+                  color: Colors.amber,
+                ),
+                const SizedBox(height: 50),
+
+                // Stats card
+                _StatsCard(
+                  completionPct: (completion * 100).round(),
+                  total: totalQuestions,
+                  correct: correct,
+                  wrong: wrong,
+                ),
+                const SizedBox(height: 12),
+
+                // Actions grid
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                //   child: GridView(
+                //     shrinkWrap: true,
+                //     physics: const NeverScrollableScrollPhysics(),
+                //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //       crossAxisCount: 3,
+                //       crossAxisSpacing: 12,
+                //       mainAxisSpacing: 12,
+                //       childAspectRatio: 1.1,
+                //     ),
+                //     children: [
+                //       IconAction(
+                //         icon: Icons.refresh_rounded,
+                //         label: 'Play Again',
+                //         onTap: () => Get.offNamed('/quiz-play', arguments: quiz),
+                //       ),
+                //       IconAction(
+                //         icon: Icons.visibility_rounded,
+                //         label: 'Review Answer',
+                //         onTap: () {},
+                //       ),
+                //       IconAction(
+                //         icon: Icons.share_rounded,
+                //         label: 'Share Score',
+                //         onTap: () {},
+                //       ),
+                //       IconAction(
+                //         icon: Icons.picture_as_pdf_rounded,
+                //         label: 'Generate PDF',
+                //         onTap: () {},
+                //       ),
+                //       IconAction(
+                //         icon: Icons.home_rounded,
+                //         label: 'Home',
+                //         onTap: () => Get.offAllNamed('/home'),
+                //       ),
+                //       IconAction(
+                //         icon: Icons.emoji_events_rounded,
+                //         label: 'Leaderboard',
+                //         onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 90,
+                          child: IconAction(
+                            icon: Icons.home_rounded,
+                            label: 'Home',
+                            onTap: () => Get.offAllNamed('/home'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 20,),
+                      Expanded(
+                        child: SizedBox(
+                          height: 90,
+                          child: IconAction(
+                            icon: Icons.emoji_events_rounded,
+                            label: 'Leaderboard',
+                            onTap: () {Get.offAllNamed(AppRoutes.leaderboard);},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

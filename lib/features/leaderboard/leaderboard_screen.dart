@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:confetti/confetti.dart';
+import 'package:quiz_application/features/bg/bg.dart';
 import 'package:quiz_application/utils/colors.dart';
 import 'leaderboard_controller.dart';
 import '../../mode/user_stats_model.dart';
@@ -14,7 +15,7 @@ class LeaderboardScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const _PurpleBackground(),
+           PurpleBackground(),
 
           // Confetti
           Align(
@@ -81,43 +82,6 @@ class LeaderboardScreen extends StatelessWidget {
   }
 }
 
-// ---------------------- Background ----------------------
-class _PurpleBackground extends StatelessWidget {
-  const _PurpleBackground();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            darkRed,
-            lightRed,
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(left: -30, top: 60, child: _bubble(140, 0.10)),
-          Positioned(right: -20, top: 40, child: _bubble(90, 0.14)),
-          Positioned(right: 40, top: 180, child: _bubble(60, 0.10)),
-          Positioned(left: 20, top: 220, child: _bubble(40, 0.12)),
-        ],
-      ),
-    );
-  }
-
-  Widget _bubble(double s, double o) => Container(
-    width: s,
-    height: s,
-    decoration: BoxDecoration(
-      color: Colors.white.withOpacity(o),
-      shape: BoxShape.circle,
-    ),
-  );
-}
 
 // ---------------------- Frost Controls ----------------------
 class _FrostIcon extends StatelessWidget {

@@ -1,6 +1,7 @@
 // lib/features/quiz_list/quiz_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_application/features/bg/bg.dart';
 import 'package:quiz_application/routes/app_routes.dart';
 
 import 'QuizListController.dart';
@@ -13,7 +14,10 @@ class QuizListScreen extends StatelessWidget {
     final controller = Get.put(QuizListController());
 
     return Scaffold(
-      body: CustomScrollView(
+      body: Stack(
+          children: [
+          PurpleBackground(),
+      CustomScrollView(
         slivers: [
           // Header with image, title, and description
           SliverAppBar(
@@ -252,8 +256,8 @@ class QuizListScreen extends StatelessWidget {
             );
           }),
         ],
-      ),
-    );
+      ),]
+    ));
   }
 
   Widget _buildStatItem(IconData icon, String text) {
