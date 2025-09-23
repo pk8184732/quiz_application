@@ -39,6 +39,10 @@ dependencies:
   carousel_slider:
   percent_indicator: ^4.2.2
   google_fonts: ^4.0.3
+  cached_network_image: ^3.4.1
+  confetti: ^0.8.0
+  get: ^4.7.2
+  animated_text_kit: ^4.2.3
 
 dev_dependencies:
   flutter_test:
