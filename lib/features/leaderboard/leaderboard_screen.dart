@@ -1,64 +1,10 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:confetti/confetti.dart';
+import 'package:quiz_application/utils/colors.dart';
+import 'leaderboard_controller.dart';
+import '../../mode/user_stats_model.dart';
 
-void main() => runApp(const App());
-
-class App extends StatelessWidget {
-  const App({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Leaderboard',
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF0EAFE),
-        fontFamily: 'Roboto',
-      ),
-      home: const LeaderboardScreen(),
-    );
-  }
-}
-
-// ---------------------- Controller (GetX) ----------------------
-class LeaderboardController extends GetxController {
-  final tabs = const ['Today', 'Month', 'All Times'];
-  final tabIndex = 0.obs;
-
-  void setTab(int i) => tabIndex.value = i;
-
-  // Exact demo data to match UI
-  final top = const [
-    _TopUser(name: 'Moni', score: 442),
-    _TopUser(name: 'Mobarak', score: 453, isWinner: true),
-    _TopUser(name: 'Keya', score: 373),
-  ];
-
-  final rows = const <_RowUser>[
-    _RowUser(rank: 1, name: 'Kaosar', score: 224),
-    _RowUser(rank: 5, name: 'Shoaib', score: 163),
-    _RowUser(rank: 6, name: 'Muhib', score: 131),
-    _RowUser(rank: 7, name: 'Shams', score: 129),
-    _RowUser(rank: 18, name: 'You', score: 124),
-  ];
-}
-
-class _TopUser {
-  final String name;
-  final int score;
-  final bool isWinner;
-  const _TopUser({required this.name, required this.score, this.isWinner = false});
-}
-
-class _RowUser {
-  final int rank;
-  final String name;
-  final int score;
-  const _RowUser({required this.rank, required this.name, required this.score});
-}
-
-// ---------------------- Screen (Stateless) ----------------------
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({super.key});
 
@@ -69,22 +15,36 @@ class LeaderboardScreen extends StatelessWidget {
       body: Stack(
         children: [
           const _PurpleBackground(),
+
+          // Confetti
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: c.confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              emissionFrequency: 0.05,
+              numberOfParticles: 25,
+              maxBlastForce: 20,
+              minBlastForce: 8,
+              gravity: 0.2,
+            ),
+          ),
+
           SafeArea(
             child: Column(
               children: [
                 // Top bar
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     children: [
                       _FrostIcon(
                         icon: Icons.arrow_back,
-                        onTap: () {},
-                      ),
-                      const Spacer(),
-                      _FrostCircle(
-                        child: Icon(Icons.person, color: Colors.white.withOpacity(0.95)),
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                       ),
                     ],
                   ),
@@ -102,11 +62,16 @@ class LeaderboardScreen extends StatelessWidget {
 
                 // Podium
                 const SizedBox(height: 10),
-                _PodiumSection(),
+                Obx(() {
+                  if (c.top3.length < 3) return const SizedBox();
+                  return _PodiumSection(top3: c.top3);
+                }),
 
                 // List
                 const SizedBox(height: 14),
-                const _RankingList(),
+                Expanded(
+                  child: _RankingList(rest: c.rest),
+                ),
               ],
             ),
           ),
@@ -128,34 +93,17 @@ class _PurpleBackground extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF9269FF), // top
-            Color(0xFF7C4DFF), // bottom
+            darkRed,
+            lightRed,
           ],
         ),
       ),
       child: Stack(
         children: [
-          // Soft circular bubbles
-          Positioned(
-            left: -30,
-            top: 60,
-            child: _bubble(140, 0.10),
-          ),
-          Positioned(
-            right: -20,
-            top: 40,
-            child: _bubble(90, 0.14),
-          ),
-          Positioned(
-            right: 40,
-            top: 180,
-            child: _bubble(60, 0.10),
-          ),
-          Positioned(
-            left: 20,
-            top: 220,
-            child: _bubble(40, 0.12),
-          ),
+          Positioned(left: -30, top: 60, child: _bubble(140, 0.10)),
+          Positioned(right: -20, top: 40, child: _bubble(90, 0.14)),
+          Positioned(right: 40, top: 180, child: _bubble(60, 0.10)),
+          Positioned(left: 20, top: 220, child: _bubble(40, 0.12)),
         ],
       ),
     );
@@ -171,7 +119,7 @@ class _PurpleBackground extends StatelessWidget {
   );
 }
 
-// ---------------------- Frosted small controls ----------------------
+// ---------------------- Frost Controls ----------------------
 class _FrostIcon extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
@@ -214,7 +162,8 @@ class _Tabs extends StatelessWidget {
   final List<String> labels;
   final int index;
   final ValueChanged<int> onChanged;
-  const _Tabs({required this.labels, required this.index, required this.onChanged});
+  const _Tabs(
+      {required this.labels, required this.index, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +192,7 @@ class _Tabs extends StatelessWidget {
                     labels[i],
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
-                      color: active ? const Color(0xFF7C4DFF) : Colors.white,
+                      color: active ? darkRed : Colors.white,
                     ),
                   ),
                 ),
@@ -256,14 +205,16 @@ class _Tabs extends StatelessWidget {
   }
 }
 
-// ---------------------- Podium Section ----------------------
+// ---------------------- Podium ----------------------
 class _PodiumSection extends StatelessWidget {
+  final List<UserStatsModel> top3;
+  const _PodiumSection({required this.top3});
+
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<LeaderboardController>();
-    final p2 = c.top[0]; // left
-    final p1 = c.top[1]; // center
-    final p3 = c.top[2]; // right
+    final p2 = top3[0];
+    final p1 = top3[1];
+    final p3 = top3[2];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -272,45 +223,42 @@ class _PodiumSection extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // Left (2)
             _PodiumCard(
               name: p2.name,
               place: 2,
-              points: p2.score,
-              height: 150,
+              points: p2.totalPoints,
+              height: 140,
               shade: 0.28,
-              topAvatarOffset: 6,
+              topAvatarOffset: 4,
             ),
             const SizedBox(width: 10),
-            // Center (1) with crown
             Stack(
               alignment: Alignment.topCenter,
               children: [
                 _PodiumCard(
                   name: p1.name,
                   place: 1,
-                  points: p1.score,
-                  height: 190,
+                  points: p1.totalPoints,
+                  height: 170,
                   shade: 0.40,
                   topAvatarOffset: -2,
                   isCenter: true,
                 ),
                 Positioned(
                   top: -2,
-                  child: Icon(Icons.workspace_premium_rounded,
-                      color: const Color(0xFFFFE066), size: 22),
+                  child: Icon(Icons.workspace_premium_sharp,
+                      color: Colors.deepOrangeAccent, size: 32),
                 ),
               ],
             ),
             const SizedBox(width: 10),
-            // Right (3)
             _PodiumCard(
               name: p3.name,
               place: 3,
-              points: p3.score,
-              height: 130,
+              points: p3.totalPoints,
+              height: 120,
               shade: 0.22,
-              topAvatarOffset: 10,
+              topAvatarOffset: 5,
             ),
           ],
         ),
@@ -344,7 +292,6 @@ class _PodiumCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Avatar and name
           Transform.translate(
             offset: Offset(0, topAvatarOffset),
             child: Column(
@@ -355,7 +302,7 @@ class _PodiumCard extends StatelessWidget {
                   child: Text(
                     name.isEmpty ? '?' : name[0],
                     style: const TextStyle(
-                        color: Color(0xFF7C4DFF), fontWeight: FontWeight.w800),
+                        color: darkRed, fontWeight: FontWeight.w800),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -368,14 +315,14 @@ class _PodiumCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          // Bar with big number and score
           Container(
             height: height,
             decoration: BoxDecoration(
               color: barColor,
               borderRadius: BorderRadius.circular(14),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+            padding:
+            const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -436,87 +383,88 @@ class _ScoreSmall extends StatelessWidget {
 
 // ---------------------- Ranking List ----------------------
 class _RankingList extends StatelessWidget {
-  const _RankingList();
+  final List<UserStatsModel> rest;
+  const _RankingList({required this.rest});
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<LeaderboardController>();
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: ListView.separated(
-          padding: const EdgeInsets.only(top: 8, bottom: 12),
-          itemCount: c.rows.length,
-          separatorBuilder: (_, __) => const Divider(height: 1, color: Color(0xFFF0EAFE)),
-          itemBuilder: (context, i) {
-            final u = c.rows[i];
-            return ListTile(
-              leading: Text(
-                u.rank.toString().padLeft(2, '0'),
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-              ),
-              title: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: const Color(0xFFF1ECFF),
-                    child: Text(
-                      u.name[0],
-                      style: const TextStyle(
-                          color: Color(0xFF7C4DFF), fontWeight: FontWeight.w800),
-                    ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+      ),
+      child: ListView.separated(
+        padding: const EdgeInsets.only(top: 8, bottom: 12),
+        itemCount: rest.length,
+        separatorBuilder: (_, __) =>
+        const Divider(height: 1, color: Color(0xFFF0EAFE)),
+        itemBuilder: (context, i) {
+          final u = rest[i];
+          return ListTile(
+            leading: Text(
+              (i + 4).toString().padLeft(2, '0'), // Rank after top3
+              style:
+              const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+            ),
+            title: Row(
+              children: [
+                CircleAvatar(
+                  radius: 16,
+                  backgroundColor: const Color(0xFFF1ECFF),
+                  child: Text(
+                    u.name[0],
+                    style: const TextStyle(
+                        color: darkRed, fontWeight: FontWeight.w800),
                   ),
-                  const SizedBox(width: 10),
-                  Text(u.name,
-                      style: const TextStyle(fontWeight: FontWeight.w600)),
-                ],
-              ),
-              trailing: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFEDE7FF),
-                  borderRadius: BorderRadius.circular(14),
                 ),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: u.score.toString(),
-                        style: const TextStyle(
-                          color: Color(0xFF7C4DFF),
-                          fontWeight: FontWeight.w800,
-                          fontSize: 13,
-                        ),
+                const SizedBox(width: 10),
+                Text(u.name,
+                    style: const TextStyle(fontWeight: FontWeight.w600)),
+              ],
+            ),
+            trailing: Container(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFEDE7FF),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: u.totalPoints.toString(),
+                      style: const TextStyle(
+                        color: darkRed,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
                       ),
-                      const WidgetSpan(child: SizedBox(width: 2)),
-                      WidgetSpan(
-                        child: Transform.translate(
-                          offset: const Offset(0, -2),
-                          child: const Text(
-                            'pt',
-                            style: TextStyle(
-                              color: Color(0xFF7C4DFF),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 10,
-                            ),
+                    ),
+                    const WidgetSpan(child: SizedBox(width: 2)),
+                    WidgetSpan(
+                      child: Transform.translate(
+                        offset: const Offset(0, -2),
+                        child: const Text(
+                          'pt',
+                          style: TextStyle(
+                            color: darkRed,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-            );
-          },
-        ),
+            ),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+            contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+          );
+        },
       ),
     );
   }

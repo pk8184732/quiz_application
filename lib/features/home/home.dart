@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:quiz_application/features/home/HomeController.dart';
+import 'package:quiz_application/routes/app_routes.dart';
 
 import '../../app_importer.dart';
 
@@ -24,6 +25,14 @@ class HomeScreen extends StatelessWidget {
         ),
         centerTitle: false,
         actions: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed(AppRoutes.leaderboard);
+            },
+            icon: const Icon(Icons.auto_graph,
+                color: Colors.white, size: 30),
+          ),
+          SizedBox(width: 8),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.notifications,

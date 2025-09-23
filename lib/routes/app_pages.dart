@@ -5,6 +5,7 @@ import 'package:quiz_application/features/quiz/quiz_screen.dart';
 import 'package:quiz_application/features/quizList/QuizListScreen.dart';
 import 'package:quiz_application/features/result_screen/result_screen.dart';
 import 'package:quiz_application/features/welcome/welcome_screen.dart';
+import '../features/leaderboard/leaderboard_screen.dart';
 import 'app_routes.dart';
 
 class AppRoutePages {
@@ -33,6 +34,11 @@ class AppRoutePages {
     GetPage(
       name: AppRoutes.quizResult,
       page: () => QuizResultScreen(),
+      transition: Transition.size,
+    ),
+    GetPage(
+      name: AppRoutes.leaderboard,
+      page: () => LeaderboardScreen(),
       transition: Transition.size,
     ),
   ];

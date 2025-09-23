@@ -37,6 +37,7 @@ class HomeController extends GetxController {
         rank: "Beginner",
         streak: 0,
         achievements: [],
+        name: 'puja',
       ).obs;
 
   // Categories for filtering
