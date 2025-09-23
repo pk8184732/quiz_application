@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_application/features/bg/bg.dart';
 import 'package:quiz_application/features/quiz/quiz_play_controller.dart';
 import '../../mode/quiz_model.dart';
 import '../../mode/question_model.dart';
@@ -61,71 +62,76 @@ class QuizPlayScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: SafeArea(
-        child: Obx(() {
-          final question = controller.currentQuestion;
+      body: Stack(
+        children: [
+          PurpleBackground(),
+          SafeArea(
+            child: Obx(() {
+              final question = controller.currentQuestion;
 
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header row
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.timer, size: 24, color: Colors.white),
-                      const SizedBox(width: 4),
-                      Text(
-                        "${controller.timeLeft.value}s",
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-                      ),
-                      const Spacer(),
-                      const Icon(Icons.star, color: Colors.amber, size: 24),
-                      const SizedBox(width: 4),
-                      // Animated score
-                      Obx(() {
-                        return TweenAnimationBuilder<int>(
-                          tween: IntTween(begin: controller.oldScore.value, end: controller.score.value),
-                          duration: const Duration(milliseconds: 600),
-                          builder: (context, value, child) {
-                            return Text(
-                              "$value",
-                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-                            );
-                          },
-                        );
-                      }),
-                      const SizedBox(width: 4),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                // Question text
-                Flexible(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text(
-                          question.question,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header row
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.timer, size: 24, color: Colors.white),
+                          const SizedBox(width: 4),
+                          Text(
+                            "${controller.timeLeft.value}s",
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
                           ),
-                        ),
-                        const SizedBox(height: 18),
-                        _buildQuestionType(question, controller),
-                      ],
+                          const Spacer(),
+                          const Icon(Icons.star, color: Colors.amber, size: 24),
+                          const SizedBox(width: 4),
+                          // Animated score
+                          Obx(() {
+                            return TweenAnimationBuilder<int>(
+                              tween: IntTween(begin: controller.oldScore.value, end: controller.score.value),
+                              duration: const Duration(milliseconds: 600),
+                              builder: (context, value, child) {
+                                return Text(
+                                  "$value",
+                                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+                                );
+                              },
+                            );
+                          }),
+                          const SizedBox(width: 4),
+                        ],
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+
+                    // Question text
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Text(
+                              question.question,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            _buildQuestionType(question, controller),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }
