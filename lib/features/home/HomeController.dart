@@ -789,7 +789,7 @@ class HomeController extends GetxController {
         tags: ["Creative", "Culture"],
         isCompleted: false,
         bestScore: 0,
-        questions: [],
+        questions: generalQuestions,
         createdAt: DateTime.now().subtract(const Duration(days: 25)),
         prize: "₹150",
         termsAndConditions: [
@@ -817,7 +817,7 @@ class HomeController extends GetxController {
         tags: ["Trending", "Tech"],
         isCompleted: false,
         bestScore: 0,
-        questions: [],
+        questions:generalQuestions,
         createdAt: DateTime.now().subtract(const Duration(days: 10)),
         termsAndConditions: [
           "Free for all registered players.",
@@ -843,7 +843,7 @@ class HomeController extends GetxController {
         tags: ["Sports", "Fun"],
         isCompleted: false,
         bestScore: 0,
-        questions: [],
+        questions:generalQuestions,
         createdAt: DateTime.now().subtract(const Duration(days: 5)),
         termsAndConditions: [
           "Each player can join unlimited times.",
