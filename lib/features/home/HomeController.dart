@@ -84,6 +84,7 @@ class HomeController extends GetxController {
     musicPlayer!.setAsset("assets/ringtone/$file");
     musicPlayer!.play();
     isAudioPlaying = true;
+
   }
 
   void stopAudio() {

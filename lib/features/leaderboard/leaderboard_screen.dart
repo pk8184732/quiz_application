@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:confetti/confetti.dart';
 import 'package:quiz_application/features/bg/bg.dart';
 import 'package:quiz_application/utils/colors.dart';
+import '../home/HomeController.dart';
+import '../home/audio_controller.dart';
 import 'leaderboard_controller.dart';
 import '../../mode/user_stats_model.dart';
 
@@ -12,71 +14,87 @@ class LeaderboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = Get.put(LeaderboardController());
-    return Scaffold(
-      body: Stack(
-        children: [
-           PurpleBackground(),
+    final controller = Get.put(AudioController());
 
-          // Confetti
-          Align(
-            alignment: Alignment.topCenter,
-            child: ConfettiWidget(
-              confettiController: c.confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              shouldLoop: false,
-              emissionFrequency: 0.05,
-              numberOfParticles: 25,
-              maxBlastForce: 20,
-              minBlastForce: 8,
-              gravity: 0.2,
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      controller.startAudioSegment(
+        "celebration.mp3",
+        start: Duration(seconds: 2),
+        end: Duration(seconds: 7),
+      );
+    });
+    return  WillPopScope(
+      onWillPop: () async {
+        controller.stopAudio(); // stop segment if back pressed
+        return true;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+             PurpleBackground(),
+      
+            // Confetti
+            Align(
+              alignment: Alignment.topCenter,
+              child: ConfettiWidget(
+                confettiController: c.confettiController,
+                blastDirectionality: BlastDirectionality.explosive,
+                shouldLoop: false,
+                emissionFrequency: 0.05,
+                numberOfParticles: 25,
+                maxBlastForce: 20,
+                minBlastForce: 8,
+                gravity: 0.2,
+              ),
             ),
-          ),
-
-          SafeArea(
-            child: Column(
-              children: [
-                // Top bar
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      _FrostIcon(
-                        icon: Icons.arrow_back,
-                        onTap: () {
-                          Get.back();
-                        },
-                      ),
-                    ],
+      
+            SafeArea(
+              child: Column(
+                children: [
+                  // Top bar
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Row(
+                      children: [
+                        _FrostIcon(
+                          icon: Icons.arrow_back,
+                          onTap: () {
+                            Get.back();
+                            controller.stopAudio();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-
-                // Tabs
-                const SizedBox(height: 6),
-                Obx(
-                      () => _Tabs(
-                    labels: c.tabs,
-                    index: c.tabIndex.value,
-                    onChanged: c.setTab,
+      
+                  // Tabs
+                  const SizedBox(height: 6),
+                  Obx(
+                        () => _Tabs(
+                      labels: c.tabs,
+                      index: c.tabIndex.value,
+                      onChanged: c.setTab,
+                    ),
                   ),
-                ),
-
-                // Podium
-                const SizedBox(height: 10),
-                Obx(() {
-                  if (c.top3.length < 3) return const SizedBox();
-                  return _PodiumSection(top3: c.top3);
-                }),
-
-                // List
-                const SizedBox(height: 14),
-                Expanded(
-                  child: _RankingList(rest: c.rest),
-                ),
-              ],
+      
+                  // Podium
+                  const SizedBox(height: 10),
+                  Obx(() {
+                    if (c.top3.length < 3) return const SizedBox();
+                    return _PodiumSection(top3: c.top3);
+                  }),
+      
+                  // List
+                  const SizedBox(height: 14),
+                  Expanded(
+                    child: _RankingList(rest: c.rest),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
