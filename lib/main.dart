@@ -5,9 +5,10 @@ import 'package:quiz_application/routes/app_pages.dart';
 import 'package:quiz_application/routes/app_routes.dart';
 import 'package:quiz_application/themes/app_theme.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(ThemeController());
+
   runApp(const MyApp());
 }
 
