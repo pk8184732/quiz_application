@@ -284,7 +284,7 @@ class QuizListScreen extends StatelessWidget {
 
   Widget _buildQuizCard(dynamic quiz, QuizListController controller) {
     return GestureDetector(
-      onTap: () =>  Get.toNamed(AppRoutes.quiz, arguments: quiz),
+      onTap: () =>  Get.toNamed(AppRoutes.details, arguments: quiz),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

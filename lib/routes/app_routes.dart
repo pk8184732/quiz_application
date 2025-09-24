@@ -6,5 +6,6 @@ class AppRoutes{
   static const String quiz = '/quiz';
   static const String quizResult = '/quizResult';
   static const String leaderboard = '/leaderboard';
+  static const String details = '/details';
 
 }
