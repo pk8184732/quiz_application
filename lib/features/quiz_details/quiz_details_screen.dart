@@ -255,26 +255,29 @@ class QuizDetailsScreen extends StatelessWidget {
                     vertical: 0,
                   ),
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (c.quiz.price != null && c.quiz.price!.isNotEmpty && !c.isJoined.value ) {
-                        SnackBarHelper.showMessage(
-                          "Success",
-                          "Joining Successful",
-                        );
-                        c.isJoined.value = true;
-                      } else {
-                        c.startQuiz();
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  child: Obx(() {
+                    c.isJoined.value;
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (c.quiz.price != null &&
+                            c.quiz.price!.isNotEmpty &&
+                            !c.isJoined.value) {
+                          SnackBarHelper.showMessage(
+                            "Success",
+                            "Joining Successful",
+                          );
+                          c.isJoined.value = true;
+                        } else {
+                          c.startQuiz();
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    child: Obx(
-                          () => Text(
+                      child: Text(
                         c.quiz.price != null && c.quiz.price!.isNotEmpty
                             ? c.isJoined.value
                                 ? "Start Now"
@@ -285,8 +288,8 @@ class QuizDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ),
             ],
