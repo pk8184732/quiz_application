@@ -5,7 +5,7 @@ import 'package:quiz_application/routes/app_routes.dart';
 
 class QuizDetailsController extends GetxController {
   final QuizModel quiz;
-
+  RxBool isJoined = false.obs;
   QuizDetailsController({required this.quiz});
 
   void startQuiz() {

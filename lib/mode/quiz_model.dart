@@ -14,17 +14,21 @@ class QuizModel {
   final String category;
   final double rating;
   final int attempts;
-  final String? price;
+  final String? price; // Joining fee
+  final String? prize; // ✅ Added prize field
+  final String? winningPrize; // ✅ Winning prize
   final String imageUrl;
   final List<String> tags;
   final bool isCompleted;
   final int bestScore;
   final String? lastAttempt;
-  final List<QuestionModel> questions; // Added questions list
+  final List<QuestionModel> questions;
   final int passingScore;
   final bool isActive;
   final DateTime createdAt;
   final DateTime? updatedAt;
+
+  final List<String> termsAndConditions;
 
   QuizModel({
     required this.id,
@@ -39,6 +43,8 @@ class QuizModel {
     required this.rating,
     required this.attempts,
     this.price,
+    this.prize, // ✅
+    this.winningPrize, // ✅
     required this.imageUrl,
     required this.tags,
     required this.isCompleted,
@@ -49,6 +55,7 @@ class QuizModel {
     this.isActive = true,
     required this.createdAt,
     this.updatedAt,
+    required this.termsAndConditions,
   });
 
   factory QuizModel.fromJson(Map<String, dynamic> json) {
@@ -65,6 +72,8 @@ class QuizModel {
       rating: (json['rating'] ?? 0.0).toDouble(),
       attempts: json['attempts'] ?? 0,
       price: json['price'],
+      prize: json['prize'], // ✅
+      winningPrize: json['winningPrize'], // ✅
       imageUrl: json['imageUrl'] ?? '',
       tags: List<String>.from(json['tags'] ?? []),
       isCompleted: json['isCompleted'] ?? false,
@@ -75,8 +84,12 @@ class QuizModel {
           .toList(),
       passingScore: json['passingScore'] ?? 60,
       isActive: json['isActive'] ?? true,
-      createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
-      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      createdAt: DateTime.parse(
+        json['createdAt'] ?? DateTime.now().toIso8601String(),
+      ),
+      updatedAt:
+      json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      termsAndConditions: List<String>.from(json['termsAndConditions'] ?? []),
     );
   }
 
@@ -94,6 +107,8 @@ class QuizModel {
       'rating': rating,
       'attempts': attempts,
       'price': price,
+      'prize': prize, // ✅
+      'winningPrize': winningPrize, // ✅
       'imageUrl': imageUrl,
       'tags': tags,
       'isCompleted': isCompleted,
@@ -104,6 +119,7 @@ class QuizModel {
       'isActive': isActive,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
+      'termsAndConditions': termsAndConditions,
     };
   }
 
@@ -117,17 +133,8 @@ class QuizModel {
   bool get isPremium => type == "PREMIUM";
   bool get isFree => type == "FREE";
   int get totalQuestions => questions.length;
-  int get totalPoints => questions.fold(0, (sum, question) => sum + question.points);
-  int get estimatedDurationInMinutes => totalQuestions * 2; // 2 minutes per question
+  int get totalPoints =>
+      questions.fold(0, (sum, question) => sum + question.points);
+  int get estimatedDurationInMinutes => totalQuestions * 2;
   bool get hasQuestions => questions.isNotEmpty;
-
-  // Get questions by difficulty
-  List<QuestionModel> getQuestionsByDifficulty(String difficulty) {
-    return questions.where((q) => q.difficulty.toLowerCase() == difficulty.toLowerCase()).toList();
-  }
-
-  // Get questions by type
-  List<QuestionModel> getQuestionsByType(QuestionType type) {
-    return questions.where((q) => q.type == type).toList();
-  }
 }

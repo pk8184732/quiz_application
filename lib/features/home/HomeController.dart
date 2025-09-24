@@ -78,7 +78,7 @@ class HomeController extends GetxController {
         duration: "30 min",
         difficulty: "Hard",
         category: "Art",
-        price: "\$4.99",
+        price: "\₹4.99",
         rating: 4.8,
         enrolledUsers: 1250,
         imageUrl: "https://img.icons8.com/color/96/artist-palette.png",
@@ -97,7 +97,7 @@ class HomeController extends GetxController {
         duration: "45 min",
         difficulty: "Expert",
         category: "Science",
-        price: "\$6.99",
+        price: "\₹6.99",
         rating: 4.9,
         enrolledUsers: 890,
         imageUrl: "https://img.icons8.com/color/96/laboratory.png",
@@ -116,7 +116,7 @@ class HomeController extends GetxController {
         duration: "40 min",
         difficulty: "Hard",
         category: "History",
-        price: "\$5.99",
+        price: "\₹5.99",
         rating: 4.7,
         enrolledUsers: 1100,
         imageUrl: "https://img.icons8.com/color/96/ancient-columns.png",
@@ -349,14 +349,14 @@ class HomeController extends GetxController {
     ];
 
 
-    // Initialize quizzes with model classes
+// Initialize quizzes with model classes
     quizzes.addAll([
       QuizModel(
         id: "quiz_1",
         title: "General Knowledge",
         subtitle: "Test your basic knowledge",
         description:
-            "A comprehensive quiz covering various topics including current affairs, basic science, and general awareness",
+        "A comprehensive quiz covering various topics including current affairs, basic science, and general awareness.",
         type: "FREE",
         color: Colors.purple,
         duration: "15 min",
@@ -369,14 +369,21 @@ class HomeController extends GetxController {
         isCompleted: false,
         bestScore: 0,
         questions: generalQuestions,
-        createdAt: DateTime.now().subtract(Duration(days: 30)),
+        createdAt: DateTime.now().subtract(const Duration(days: 30)),
+        termsAndConditions: [
+          "Each player can attempt the quiz only once per day.",
+          "Leaderboard is refreshed daily at midnight.",
+          "No negative marking for wrong answers.",
+          "Prizes (if applicable) will be distributed within 24 hours.",
+          "By joining, you agree to our fair-play policy.",
+        ],
       ),
       QuizModel(
         id: "quiz_2",
         title: "Science Fundamentals",
         subtitle: "Basic science concepts",
         description:
-            "Explore fundamental concepts in physics, chemistry, and biology suitable for beginners",
+        "Explore fundamental concepts in physics, chemistry, and biology suitable for beginners.",
         type: "PREMIUM",
         color: Colors.pink,
         duration: "20 min",
@@ -384,20 +391,29 @@ class HomeController extends GetxController {
         category: "Science",
         rating: 4.6,
         attempts: 2180,
-        price: "\$2.99",
+        price: "₹2.99",
         imageUrl: "https://img.icons8.com/color/96/microscope.png",
         tags: ["Educational", "Science"],
         isCompleted: false,
         bestScore: 0,
         questions: scienceQuestions,
-        createdAt: DateTime.now().subtract(Duration(days: 20)),
+        createdAt: DateTime.now().subtract(const Duration(days: 20)),
+        prize: "₹200",
+        termsAndConditions: [
+          "Joining fee is non-refundable.",
+          "Top 3 scorers will receive the prize money.",
+          "Cheating or multiple logins will disqualify participants.",
+          "Prize will be credited to your wallet within 48 hours.",
+          "The decision of the organizers will be final.",
+          "By joining, you accept all terms & conditions.",
+        ],
       ),
       QuizModel(
         id: "quiz_3",
         title: "Mathematics Challenge",
         subtitle: "Math problems & puzzles",
         description:
-            "Challenge yourself with mathematical problems ranging from basic arithmetic to advanced concepts",
+        "Challenge yourself with mathematical problems ranging from basic arithmetic to advanced concepts.",
         type: "FREE",
         color: Colors.blue,
         duration: "25 min",
@@ -411,14 +427,20 @@ class HomeController extends GetxController {
         bestScore: 120,
         lastAttempt: "2025-09-20",
         questions: mathQuestions,
-        createdAt: DateTime.now().subtract(Duration(days: 15)),
+        createdAt: DateTime.now().subtract(const Duration(days: 15)),
+        termsAndConditions: [
+          "This quiz is for practice purposes only.",
+          "You can retry multiple times to improve your score.",
+          "Leaderboard ranks are visible to all players.",
+          "Share with friends to unlock bonus challenges.",
+        ],
       ),
       QuizModel(
         id: "quiz_4",
         title: "Art & Culture",
         subtitle: "Arts, culture & creativity",
         description:
-            "Discover the world of art, culture, music, and creative expressions from around the globe",
+        "Discover the world of art, culture, music, and creative expressions from around the globe.",
         type: "PREMIUM",
         color: Colors.amber,
         duration: "18 min",
@@ -426,20 +448,28 @@ class HomeController extends GetxController {
         category: "Culture",
         rating: 4.3,
         attempts: 1560,
-        price: "\$1.99",
+        price: "₹1.99",
         imageUrl: "https://img.icons8.com/color/96/museum.png",
         tags: ["Creative", "Culture"],
         isCompleted: false,
         bestScore: 0,
         questions: [],
-        createdAt: DateTime.now().subtract(Duration(days: 25)),
+        createdAt: DateTime.now().subtract(const Duration(days: 25)),
+        prize: "₹150",
+        termsAndConditions: [
+          "Participation fee applies to all players.",
+          "Prize will be awarded to the highest scorer.",
+          "In case of tie, prize will be shared equally.",
+          "Ensure stable internet connection during play.",
+          "Organizers reserve the right to disqualify fraud accounts.",
+        ],
       ),
       QuizModel(
         id: "quiz_5",
         title: "Technology & Innovation",
         subtitle: "Modern tech trends",
         description:
-            "Stay updated with the latest in technology, AI, programming, and digital innovations",
+        "Stay updated with the latest in technology, AI, programming, and digital innovations.",
         type: "FREE",
         color: Colors.green,
         duration: "20 min",
@@ -452,14 +482,20 @@ class HomeController extends GetxController {
         isCompleted: false,
         bestScore: 0,
         questions: [],
-        createdAt: DateTime.now().subtract(Duration(days: 10)),
+        createdAt: DateTime.now().subtract(const Duration(days: 10)),
+        termsAndConditions: [
+          "Free for all registered players.",
+          "Top scorers will be featured on the leaderboard.",
+          "Can be attempted once per user.",
+          "No cash prize for free category quizzes.",
+        ],
       ),
       QuizModel(
         id: "quiz_6",
         title: "Sports & Games",
         subtitle: "Sports knowledge test",
         description:
-            "Test your knowledge about various sports, famous athletes, and sporting events worldwide",
+        "Test your knowledge about various sports, famous athletes, and sporting events worldwide.",
         type: "FREE",
         color: Colors.orange,
         duration: "16 min",
@@ -472,9 +508,16 @@ class HomeController extends GetxController {
         isCompleted: false,
         bestScore: 0,
         questions: [],
-        createdAt: DateTime.now().subtract(Duration(days: 5)),
+        createdAt: DateTime.now().subtract(const Duration(days: 5)),
+        termsAndConditions: [
+          "Each player can join unlimited times.",
+          "Leaderboard is updated in real-time.",
+          "Top scorers get special badges.",
+          "This is a free-to-play quiz, no prize included.",
+        ],
       ),
     ]);
+
 
     // Your categories initialization will now work correctly
     categories.addAll([
