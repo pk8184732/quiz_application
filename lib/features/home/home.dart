@@ -286,28 +286,34 @@ class HomeScreen extends StatelessWidget {
                                   Container(
                                     height: 90,
                                     width: 100,
-                                    padding: EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       color: Colors.white.withOpacity(0.2),
                                       borderRadius: BorderRadius.circular(12),
+                                      image: DecorationImage(
+                                        image: NetworkImage(quiz.imageUrl), // Your image URL
+                                        fit: BoxFit.cover, // Makes the image fill the container
+                                      ),
                                     ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.network(
-                                          quiz.imageUrl, // Replace with your image URL
-                                          width: 28,   // Same size as your icon
-                                          height: 28,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, color: Colors.white),
+                                    // Optional: show placeholder if image fails
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Image.network(
+                                        quiz.imageUrl,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        errorBuilder: (context, error, stackTrace) => Container(
+                                          color: Colors.black26,
+                                          alignment: Alignment.center,
+                                          child: const Icon(Icons.broken_image, color: Colors.white),
                                         ),
-                                      ],
+                                      ),
                                     ),
-
                                   ),
                                 ],
                               ),
                             ),
+
                           ],
                         ),
                       ),
