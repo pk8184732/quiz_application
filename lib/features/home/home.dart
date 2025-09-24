@@ -195,6 +195,37 @@ class HomeScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 12),
+                // Container(
+                //   color: Colors.green,
+                //   height: 200,
+                //   width: 200,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       if (controller.isAudioPlaying) {
+                //         controller.stopAudio();
+                //       } else {
+                //         controller.startAudio("click.mp3"); // ✅ argument diya
+                //       }
+                //     },
+                //     child: Text("Play"),
+                //   ),
+                // ),
+                // Container(
+                //   color: Colors.red,
+                //   height: 200,
+                //   width: 200,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       if (controller.isAudioPlaying) {
+                //         controller.stopAudio();
+                //       } else {
+                //         controller.startAudio("wrong.mp3"); // ❌ Wrong sound
+                //       }
+                //     },
+                //     child: Text("Play Wrong"),
+                //   ),
+                // ),
+
 
                 // 🔹 Quiz List View - COMPLETELY FIXED
                 Obx(() => ListView.separated(
@@ -293,6 +324,9 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+
+
+
                                 ],
                               ),
                             ),

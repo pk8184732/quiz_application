@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quiz_application/features/quiz/quiz_play_controller.dart';
 import '../../mode/quiz_model.dart';
 import '../../mode/question_model.dart';
+import '../home/HomeController.dart';
 
 class QuizPlayScreen extends StatelessWidget {
   const QuizPlayScreen({super.key});
@@ -381,11 +382,119 @@ class QuizPlayScreen extends StatelessWidget {
     final baseBadgeBg = Colors.white.withOpacity(0.18);
     const baseBadgeText = Colors.white;
 
+    // if (answered) {
+    //   if (isCorrect) {
+    //     final controller = Get.put(HomeController());
+    //     if (controller.isAudioPlaying) {
+    //       controller.stopAudio();
+    //     }else{
+    //       controller.startAudio();
+    //     }
+    //     return _OptionColors(background: const Color(0xFF2E7D32),
+    //         border: const Color(0xFF1B5E20),
+    //         text: Colors.white,
+    //         badgeBg: Colors.white.withOpacity(0.22),
+    //         badgeText: Colors.white);
+    //   }      if (isSelected && !isCorrect) return const _OptionColors(background: Color(0xFFC62828), border: Color(0xFF8E0000), text: Colors.white, badgeBg: Color(0x33FFFFFF), badgeText: Colors.white);
+    //   return _OptionColors(background: baseBg, border: baseBorder, text: baseText, badgeBg: baseBadgeBg, badgeText: baseBadgeText);
+    // }
+
+
+
     if (answered) {
-      if (isCorrect) return _OptionColors(background: const Color(0xFF2E7D32), border: const Color(0xFF1B5E20), text: Colors.white, badgeBg: Colors.white.withOpacity(0.22), badgeText: Colors.white);
-      if (isSelected && !isCorrect) return const _OptionColors(background: Color(0xFFC62828), border: Color(0xFF8E0000), text: Colors.white, badgeBg: Color(0x33FFFFFF), badgeText: Colors.white);
-      return _OptionColors(background: baseBg, border: baseBorder, text: baseText, badgeBg: baseBadgeBg, badgeText: baseBadgeText);
+      final controller = Get.put(HomeController());
+
+      if (isCorrect) {
+        // ✅ Correct answer → play click audio
+        controller.stopAudio();
+        controller.startAudio("failans.mp3");
+
+        return _OptionColors(
+          background: const Color(0xFF2E7D32),
+          border: const Color(0xFF1B5E20),
+          text: Colors.white,
+          badgeBg: Colors.white.withOpacity(0.22),
+          badgeText: Colors.white,
+        );
+      } else if (isSelected && !isCorrect) {
+        // ❌ Wrong answer → play wrong audio
+        controller.stopAudio();
+        controller.startAudio("wrong.mp3");
+
+        return const _OptionColors(
+          background: Color(0xFFC62828),
+          border: Color(0xFF8E0000),
+          text: Colors.white,
+          badgeBg: Color(0x33FFFFFF),
+          badgeText: Colors.white,
+        );
+      } else {
+        // Not selected option → default colors
+        return _OptionColors(
+          background: baseBg,
+          border: baseBorder,
+          text: baseText,
+          badgeBg: baseBadgeBg,
+          badgeText: baseBadgeText,
+        );
+      }
+    } else {
+      // Before answer is submitted → default state
+      return _OptionColors(
+        background: baseBg,
+        border: baseBorder,
+        text: baseText,
+        badgeBg: baseBadgeBg,
+        badgeText: baseBadgeText,
+      );
     }
+
+    // if (answered) {
+    //   final controller = Get.put(HomeController());
+    //
+    //   if (isCorrect) {
+    //     // ✅ Correct answer → play click audio
+    //     controller.stopAudio();
+    //     controller.startAudio("click.mp3");
+    //
+    //     return _OptionColors(
+    //       background: const Color(0xFF2E7D32),
+    //       border: const Color(0xFF1B5E20),
+    //       text: Colors.white,
+    //       badgeBg: Colors.white.withOpacity(0.22),
+    //       badgeText: Colors.white,
+    //     );
+    //   }
+    //
+    //   if (isSelected && !isCorrect) {
+    //     // ❌ Wrong answer → play wrong audio
+    //     controller.stopAudio();
+    //     controller.startAudio("wrong.mp3");
+    //
+    //     return const _OptionColors(
+    //       background: Color(0xFFC62828),
+    //       border: Color(0xFF8E0000),
+    //       text: Colors.white,
+    //       badgeBg: Color(0x33FFFFFF),
+    //       badgeText: Colors.white,
+    //     );
+    //   }
+    //   else{
+    //
+    //   }
+    //
+    //   return _OptionColors(
+    //     background: baseBg,
+    //     border: baseBorder,
+    //     text: baseText,
+    //     badgeBg: baseBadgeBg,
+    //     badgeText: baseBadgeText,
+    //   );
+    // }
+    // else {
+    //
+    //   // play selected wrong answer audio
+    // }
 
     if (!answered && isSelected) return _OptionColors(background: Colors.white.withOpacity(0.14), border: Colors.white.withOpacity(0.30), text: baseText, badgeBg: Colors.white.withOpacity(0.22), badgeText: baseBadgeText);
 
@@ -403,3 +512,6 @@ class _OptionColors {
   final Color badgeText;
   const _OptionColors({required this.background, required this.border, required this.text, required this.badgeBg, required this.badgeText});
 }
+
+
+

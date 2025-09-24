@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quiz_application/routes/app_routes.dart';
 import '../../mode/quiz_model.dart';
@@ -47,6 +48,8 @@ class QuizPlayController extends GetxController {
 
     selectedOption.value = optionId;
     selectedAnswers[currentQuestion.id] = optionId;
+
+    debugPrint('Selected answer:- ${selectedAnswers.toString()}');
 
     final option = currentQuestion.options.firstWhere((o) => o.id == optionId);
 

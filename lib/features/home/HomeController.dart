@@ -1,6 +1,8 @@
 // lib/features/home/home_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
+// import 'package:just_audio/just_audio.dart';
 import 'package:quiz_application/routes/app_pages.dart';
 import 'package:quiz_application/routes/app_routes.dart';
 
@@ -13,7 +15,9 @@ import '../../mode/user_stats_model.dart';
 class HomeController extends GetxController {
   // Business logo (can be updated later from API)
   final String logoUrl = "https://img.icons8.com/color/96/quiz-logo.png";
-
+  bool isAudioLoaded = false;
+  bool isAudioPlaying = false;
+  AudioPlayer? musicPlayer;
   // Loading state
   var isLoading = false.obs;
   var selectedQuizIndex = (-1).obs;
@@ -59,6 +63,36 @@ class HomeController extends GetxController {
     super.onInit();
     initializeData();
   }
+
+  // void startAudio() {
+  //   musicPlayer ??= AudioPlayer();
+  //   musicPlayer!.setAsset("assets/ringtone/click.mp3");
+  //   musicPlayer!.play();
+  //   isAudioPlaying = true;
+  //   //
+  //
+  // }
+  //
+  // void stopAudio() {
+  //   musicPlayer?.stop();
+  //   isAudioPlaying = false;
+  // }
+
+
+  void startAudio(String file) {
+    musicPlayer ??= AudioPlayer();
+    musicPlayer!.setAsset("assets/ringtone/$file");
+    musicPlayer!.play();
+    isAudioPlaying = true;
+  }
+
+  void stopAudio() {
+    musicPlayer?.stop();
+    isAudioPlaying = false;
+  }
+
+// inside your answer checking
+
 
   // Initialize sample data with model classes
   void initializeData() {
@@ -173,14 +207,176 @@ class HomeController extends GetxController {
           QuestionOption(id: "opt4", text: "O2", isCorrect: false),
         ],
         correctAnswer: "H2O",
-        explanation:
-            "Water is composed of two hydrogen atoms and one oxygen atom.",
+        explanation: "Water is composed of two hydrogen atoms and one oxygen atom.",
         points: 15,
         timeLimit: 25,
         difficulty: "Medium",
         tags: ["Chemistry", "Basic"],
       ),
+
+      QuestionModel(
+        id: "sq2",
+        question: "What planet is known as the Red Planet?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Mars", isCorrect: true),
+          QuestionOption(id: "opt2", text: "Venus", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Jupiter", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Saturn", isCorrect: false),
+        ],
+        correctAnswer: "Mars",
+        explanation: "Mars appears red due to iron oxide (rust) on its surface.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Astronomy"],
+      ),
+
+      QuestionModel(
+        id: "sq3",
+        question: "Which gas do humans inhale to survive?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Oxygen", isCorrect: true),
+          QuestionOption(id: "opt2", text: "Carbon Dioxide", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Nitrogen", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Hydrogen", isCorrect: false),
+        ],
+        correctAnswer: "Oxygen",
+        explanation: "Humans need oxygen for cellular respiration.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Biology"],
+      ),
+
+      QuestionModel(
+        id: "sq4",
+        question: "What is the speed of light in vacuum?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "3 × 10^8 m/s", isCorrect: true),
+          QuestionOption(id: "opt2", text: "1.5 × 10^8 m/s", isCorrect: false),
+          QuestionOption(id: "opt3", text: "3 × 10^6 m/s", isCorrect: false),
+          QuestionOption(id: "opt4", text: "1 × 10^5 m/s", isCorrect: false),
+        ],
+        correctAnswer: "3 × 10^8 m/s",
+        explanation: "Light travels at approximately 300,000 km/s in a vacuum.",
+        points: 20,
+        timeLimit: 30,
+        difficulty: "Hard",
+        tags: ["Physics"],
+      ),
+
+      QuestionModel(
+        id: "sq5",
+        question: "Which vitamin is produced in the skin with the help of sunlight?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Vitamin A", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Vitamin B12", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Vitamin D", isCorrect: true),
+          QuestionOption(id: "opt4", text: "Vitamin C", isCorrect: false),
+        ],
+        correctAnswer: "Vitamin D",
+        explanation: "Sunlight helps the body produce Vitamin D from cholesterol.",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Biology", "Health"],
+      ),
+
+      QuestionModel(
+        id: "sq6",
+        question: "Who is known as the father of modern physics?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Isaac Newton", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Albert Einstein", isCorrect: true),
+          QuestionOption(id: "opt3", text: "Galileo Galilei", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Niels Bohr", isCorrect: false),
+        ],
+        correctAnswer: "Albert Einstein",
+        explanation: "Einstein's theories revolutionized physics in the 20th century.",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Physics", "History"],
+      ),
+
+      QuestionModel(
+        id: "sq7",
+        question: "What is the powerhouse of the cell?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Nucleus", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Mitochondria", isCorrect: true),
+          QuestionOption(id: "opt3", text: "Ribosome", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Chloroplast", isCorrect: false),
+        ],
+        correctAnswer: "Mitochondria",
+        explanation: "Mitochondria produce energy in the form of ATP.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Biology"],
+      ),
+
+      QuestionModel(
+        id: "sq8",
+        question: "Which element has the chemical symbol 'Fe'?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Iron", isCorrect: true),
+          QuestionOption(id: "opt2", text: "Fluorine", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Francium", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Fermium", isCorrect: false),
+        ],
+        correctAnswer: "Iron",
+        explanation: "Fe comes from the Latin word 'Ferrum', meaning iron.",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Chemistry"],
+      ),
+
+      QuestionModel(
+        id: "sq9",
+        question: "Which organ in the human body purifies blood?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Heart", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Liver", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Kidney", isCorrect: true),
+          QuestionOption(id: "opt4", text: "Lungs", isCorrect: false),
+        ],
+        correctAnswer: "Kidney",
+        explanation: "The kidneys filter waste from blood and produce urine.",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Biology", "Human Body"],
+      ),
+
+      QuestionModel(
+        id: "sq10",
+        question: "What is the largest planet in our Solar System?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Earth", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Saturn", isCorrect: false),
+          QuestionOption(id: "opt3", text: "Jupiter", isCorrect: true),
+          QuestionOption(id: "opt4", text: "Neptune", isCorrect: false),
+        ],
+        correctAnswer: "Jupiter",
+        explanation: "Jupiter is the largest planet, with a mass 318 times that of Earth.",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Astronomy"],
+      ),
     ];
+
 
     List<QuestionModel> mathQuestions = [
       QuestionModel(
@@ -200,7 +396,134 @@ class HomeController extends GetxController {
         difficulty: "Easy",
         tags: ["Addition", "Basic"],
       ),
+
+      QuestionModel(
+        id: "mq2",
+        question: "What is 12 × 8?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "96", isCorrect: true),
+          QuestionOption(id: "opt2", text: "86", isCorrect: false),
+          QuestionOption(id: "opt3", text: "108", isCorrect: false),
+          QuestionOption(id: "opt4", text: "88", isCorrect: false),
+        ],
+        correctAnswer: "96",
+        explanation: "12 × 8 = 96",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Multiplication", "Basic"],
+      ),
+
+      QuestionModel(
+        id: "mq3",
+        question: "What is the square root of 144?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "10", isCorrect: false),
+          QuestionOption(id: "opt2", text: "11", isCorrect: false),
+          QuestionOption(id: "opt3", text: "12", isCorrect: true),
+          QuestionOption(id: "opt4", text: "14", isCorrect: false),
+        ],
+        correctAnswer: "12",
+        explanation: "√144 = 12",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Square Root"],
+      ),
+
+      QuestionModel(
+        id: "mq4",
+        question: "Solve: 50 ÷ 5",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "5", isCorrect: false),
+          QuestionOption(id: "opt2", text: "10", isCorrect: true),
+          QuestionOption(id: "opt3", text: "15", isCorrect: false),
+          QuestionOption(id: "opt4", text: "20", isCorrect: false),
+        ],
+        correctAnswer: "10",
+        explanation: "50 ÷ 5 = 10",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Division", "Basic"],
+      ),
+
+      QuestionModel(
+        id: "mq5",
+        question: "What is the value of π (approx)?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "2.14", isCorrect: false),
+          QuestionOption(id: "opt2", text: "3.14", isCorrect: true),
+          QuestionOption(id: "opt3", text: "4.13", isCorrect: false),
+          QuestionOption(id: "opt4", text: "3.41", isCorrect: false),
+        ],
+        correctAnswer: "3.14",
+        explanation: "The approximate value of π is 3.14159 ≈ 3.14",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Geometry", "Constants"],
+      ),
+
+      QuestionModel(
+        id: "mq6",
+        question: "If a triangle has angles 90°, 45°, and 45°, what type is it?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "Equilateral", isCorrect: false),
+          QuestionOption(id: "opt2", text: "Isosceles Right", isCorrect: true),
+          QuestionOption(id: "opt3", text: "Scalene", isCorrect: false),
+          QuestionOption(id: "opt4", text: "Obtuse", isCorrect: false),
+        ],
+        correctAnswer: "Isosceles Right",
+        explanation: "A 90°, 45°, 45° triangle is an isosceles right triangle.",
+        points: 20,
+        timeLimit: 30,
+        difficulty: "Medium",
+        tags: ["Geometry", "Triangles"],
+      ),
+
+      QuestionModel(
+        id: "mq7",
+        question: "What is 7²?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "42", isCorrect: false),
+          QuestionOption(id: "opt2", text: "47", isCorrect: false),
+          QuestionOption(id: "opt3", text: "49", isCorrect: true),
+          QuestionOption(id: "opt4", text: "56", isCorrect: false),
+        ],
+        correctAnswer: "49",
+        explanation: "7 × 7 = 49",
+        points: 10,
+        timeLimit: 20,
+        difficulty: "Easy",
+        tags: ["Squares", "Basic"],
+      ),
+
+      QuestionModel(
+        id: "mq8",
+        question: "If x = 5, what is the value of 2x + 3?",
+        type: QuestionType.multipleChoice,
+        options: [
+          QuestionOption(id: "opt1", text: "10", isCorrect: false),
+          QuestionOption(id: "opt2", text: "12", isCorrect: false),
+          QuestionOption(id: "opt3", text: "13", isCorrect: true),
+          QuestionOption(id: "opt4", text: "15", isCorrect: false),
+        ],
+        correctAnswer: "13",
+        explanation: "2 × 5 + 3 = 10 + 3 = 13",
+        points: 15,
+        timeLimit: 25,
+        difficulty: "Medium",
+        tags: ["Algebra"],
+      ),
     ];
+
 
     List<QuestionModel> generalQuestions = [
       // 1. Multiple Choice
