@@ -294,13 +294,16 @@ class HomeScreen extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(
-                                          Icons.quiz,
-                                          color: Colors.white,
-                                          size: 28,
+                                        Image.network(
+                                          quiz.imageUrl, // Replace with your image URL
+                                          width: 28,   // Same size as your icon
+                                          height: 28,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, color: Colors.white),
                                         ),
                                       ],
                                     ),
+
                                   ),
                                 ],
                               ),
