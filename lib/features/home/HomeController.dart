@@ -81,7 +81,7 @@ class HomeController extends GetxController {
         price: "\₹4.99",
         rating: 4.8,
         enrolledUsers: 1250,
-        imageUrl: "https://img.icons8.com/color/96/artist-palette.png",
+        imageUrl: "https://i0.wp.com/magicofcreativity.com/wp-content/uploads/2016/09/Master-colors1.jpg?fit=813%2C605&ssl=1",
       ),
       PremiumBannerModel(
         id: "premium_2",
@@ -100,7 +100,7 @@ class HomeController extends GetxController {
         price: "\₹6.99",
         rating: 4.9,
         enrolledUsers: 890,
-        imageUrl: "https://img.icons8.com/color/96/laboratory.png",
+        imageUrl: "https://yt3.ggpht.com/a/AATXAJzEv9F0T5qMXFeahiizcumObPSSdwLJ3bi0mA=s900-c-k-c0xffffffff-no-rj-mo",
       ),
       PremiumBannerModel(
         id: "premium_3",
@@ -119,7 +119,7 @@ class HomeController extends GetxController {
         price: "\₹5.99",
         rating: 4.7,
         enrolledUsers: 1100,
-        imageUrl: "https://img.icons8.com/color/96/ancient-columns.png",
+        imageUrl: "https://images.twinkl.co.uk/tw1n/image/private/t_630_eco/image_repo/d9/0a/au-t2-h-001-history-display-banner-_ver_1.jpg",
       ),
     ]);
 
@@ -221,6 +221,7 @@ class HomeController extends GetxController {
         difficulty: "Easy",
         tags: ["Geography", "Europe"],
       ),
+
       // 2. True/False
       QuestionModel(
         id: "q2",
@@ -238,28 +239,31 @@ class HomeController extends GetxController {
         tags: ["Geography", "Fact"],
       ),
 
-
       // 4. Image Choice
       QuestionModel(
         id: "q4",
         question: "Identify the landmark in the image.",
         type: QuestionType.imageChoice,
-        questionImageUrl: "https://example.com/eiffel_tower.jpg",
+        questionImageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg", // Eiffel Tower
         options: [
           QuestionOption(
               id: "opt1",
               text: "Statue of Liberty",
-              imageUrl: "https://example.com/statue_liberty.jpg",
+              imageUrl:
+              "https://upload.wikimedia.org/wikipedia/commons/a/a1/Statue_of_Liberty_7.jpg",
               isCorrect: false),
           QuestionOption(
               id: "opt2",
               text: "Eiffel Tower",
-              imageUrl: "https://example.com/eiffel_tower.jpg",
+              imageUrl:
+              "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
               isCorrect: true),
           QuestionOption(
               id: "opt3",
               text: "Big Ben",
-              imageUrl: "https://example.com/big_ben.jpg",
+              imageUrl:
+              "https://as2.ftcdn.net/v2/jpg/01/02/15/85/1000_F_102158532_QuFWceYGUVGS2Buo0UFujTTeGGVsQFGh.jpg",
               isCorrect: false),
         ],
         correctAnswer: "Eiffel Tower",
@@ -269,12 +273,14 @@ class HomeController extends GetxController {
         difficulty: "Medium",
         tags: ["Landmark", "Image"],
       ),
+
       // 5. Image Question
       QuestionModel(
         id: "q5",
         question: "Which country's flag is shown?",
         type: QuestionType.imageQuestion,
-        questionImageUrl: "https://example.com/japan_flag.png",
+        questionImageUrl:
+        "https://th.bing.com/th/id/R.12a9e02aa7f57016fd6b34560abd1bfa?rik=ZiAUUlEeCeSVsA&riu=http%3a%2f%2fwww.rankflags.com%2fwp-content%2fuploads%2f2015%2f05%2fPicture-Of-Japan-Flag.jpg&ehk=AtcV477o%2fViy7WZe0lxqzrrpiyV%2f8G3y2gXxlZlfuHk%3d&risl=&pid=ImgRaw&r=0",
         options: [
           QuestionOption(id: "opt1", text: "Japan", isCorrect: true),
           QuestionOption(id: "opt2", text: "China", isCorrect: false),
@@ -287,7 +293,8 @@ class HomeController extends GetxController {
         difficulty: "Easy",
         tags: ["Flag", "Image"],
       ),
-      // 6-10: Add similar questions to fill up 10 questions per category
+
+      // 6. Multiple Choice
       QuestionModel(
         id: "q6",
         question: "Which continent is known as the 'Dark Continent'?",
@@ -306,6 +313,7 @@ class HomeController extends GetxController {
         tags: ["Geography", "Continent"],
       ),
 
+      // 8. True/False
       QuestionModel(
         id: "q8",
         question: "The Statue of Liberty is located in New York.",
@@ -321,21 +329,26 @@ class HomeController extends GetxController {
         difficulty: "Easy",
         tags: ["Landmark", "Fact"],
       ),
+
+      // 9. Image Choice
       QuestionModel(
         id: "q9",
         question: "Identify the animal in the image.",
         type: QuestionType.imageChoice,
-        questionImageUrl: "https://example.com/lion.jpg",
+        questionImageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg", // Lion
         options: [
           QuestionOption(
               id: "opt1",
               text: "Tiger",
-              imageUrl: "https://example.com/tiger.jpg",
+              imageUrl:
+              "https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg",
               isCorrect: false),
           QuestionOption(
               id: "opt2",
               text: "Lion",
-              imageUrl: "https://example.com/lion.jpg",
+              imageUrl:
+              "https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg",
               isCorrect: true),
         ],
         correctAnswer: "Lion",
@@ -345,8 +358,8 @@ class HomeController extends GetxController {
         difficulty: "Medium",
         tags: ["Animals", "Image"],
       ),
-
     ];
+
 
 
 // Initialize quizzes with model classes
@@ -364,7 +377,7 @@ class HomeController extends GetxController {
         category: "General",
         rating: 4.5,
         attempts: 5420,
-        imageUrl: "https://img.icons8.com/color/96/brain.png",
+        imageUrl: "https://img.freepik.com/premium-photo/human-brain-book-color-background-minimal-abstract-concept-school-culture-intelligence-reading-education-charger-brain-idea-generative-ai_58409-29271.jpg",
         tags: ["Popular", "Beginner"],
         isCompleted: false,
         bestScore: 0,
@@ -392,7 +405,7 @@ class HomeController extends GetxController {
         rating: 4.6,
         attempts: 2180,
         price: "₹2.99",
-        imageUrl: "https://img.icons8.com/color/96/microscope.png",
+        imageUrl: "https://img.freepik.com/free-vector/hand-drawn-science-education-background_23-2148494536.jpg?size=626&ext=jpg",
         tags: ["Educational", "Science"],
         isCompleted: false,
         bestScore: 0,
@@ -421,7 +434,7 @@ class HomeController extends GetxController {
         category: "Mathematics",
         rating: 4.4,
         attempts: 3890,
-        imageUrl: "https://img.icons8.com/color/96/calculator.png",
+        imageUrl: "https://img.freepik.com/free-vector/maths-realistic-chalkboard-background_23-2148159115.jpg?w=2000",
         tags: ["Challenge", "Logic"],
         isCompleted: true,
         bestScore: 120,
@@ -449,7 +462,7 @@ class HomeController extends GetxController {
         rating: 4.3,
         attempts: 1560,
         price: "₹1.99",
-        imageUrl: "https://img.icons8.com/color/96/museum.png",
+        imageUrl: "https://tse1.mm.bing.net/th/id/OIP.Ogla9WteCseMDLa4APr9YQHaEQ?rs=1&pid=ImgDetMain&o=7&rm=3",
         tags: ["Creative", "Culture"],
         isCompleted: false,
         bestScore: 0,
@@ -477,7 +490,7 @@ class HomeController extends GetxController {
         category: "Technology",
         rating: 4.7,
         attempts: 4250,
-        imageUrl: "https://img.icons8.com/color/96/computer.png",
+        imageUrl: "https://thumbs.dreamstime.com/z/creative-innovation-technology-ideas-inspiration-concept-60795016.jpg",
         tags: ["Trending", "Tech"],
         isCompleted: false,
         bestScore: 0,
@@ -503,7 +516,7 @@ class HomeController extends GetxController {
         category: "Sports",
         rating: 4.2,
         attempts: 2890,
-        imageUrl: "https://img.icons8.com/color/96/football.png",
+        imageUrl: "https://images.squarespace-cdn.com/content/v1/58ee0b551e5b6c8ff18b94ad/1699891416586-ISX1YK543UHUKVS9WHSA/sports+quiz+questions+and+answers.jpg",
         tags: ["Sports", "Fun"],
         isCompleted: false,
         bestScore: 0,
@@ -525,10 +538,10 @@ class HomeController extends GetxController {
         id: "cat_general",
         name: "General Knowledge",
         description: "Test your general awareness and basic knowledge",
-        imageUrl: "https://img.icons8.com/color/96/brain.png",
+        imageUrl: "https://img.freepik.com/premium-photo/knowledge-ideas-human-head_597582-505.jpg",
         color: Colors.purple,
         type: "free",
-        quizzes: [quizzes[0]],
+        quizzes: [quizzes[0],quizzes[5]],
         // General Knowledge quiz
         totalQuestions: generalQuestions.length,
         // Now works
@@ -542,10 +555,10 @@ class HomeController extends GetxController {
         id: "cat_science",
         name: "Science",
         description: "Explore the world of science and discovery",
-        imageUrl: "https://img.icons8.com/color/96/microscope.png",
+        imageUrl: "https://img.freepik.com/free-vector/hand-drawn-science-education-background_23-2148494536.jpg?size=626&ext=jpg",
         color: Colors.pink,
         type: "premium",
-        quizzes: [quizzes[1]],
+        quizzes: [quizzes[1],quizzes[3]],
         // Science Fundamentals quiz
         totalQuestions: scienceQuestions.length,
         // Now works
@@ -559,7 +572,7 @@ class HomeController extends GetxController {
         id: "cat_math",
         name: "Mathematics",
         description: "Challenge your mathematical skills",
-        imageUrl: "https://img.icons8.com/color/96/calculator.png",
+        imageUrl: "https://img.freepik.com/free-vector/maths-realistic-chalkboard-background_23-2148159115.jpg?w=2000",
         color: Colors.blue,
         type: "free",
         quizzes: [quizzes[2]],
