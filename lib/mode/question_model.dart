@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 enum QuestionType {
   multipleChoice,
   trueFalse,
-  fillInTheBlank,
   imageChoice, // New: Multiple choice with image options
   imageQuestion // New: Question with image
 }
@@ -143,8 +142,6 @@ class QuestionModel {
           return QuestionType.multipleChoice;
         case 'truefalse':
           return QuestionType.trueFalse;
-        case 'fillintheblank':
-          return QuestionType.fillInTheBlank;
         case 'imagechoice':
           return QuestionType.imageChoice;
         case 'imagequestion':
@@ -195,7 +192,6 @@ class QuestionModel {
   // Computed properties
   bool get isMultipleChoice => type == QuestionType.multipleChoice;
   bool get isTrueFalse => type == QuestionType.trueFalse;
-  bool get isFillInTheBlank => type == QuestionType.fillInTheBlank;
   bool get isImageChoice => type == QuestionType.imageChoice;
   bool get isImageQuestion => type == QuestionType.imageQuestion;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:get/get.dart';
+import 'package:quiz_application/features/bg/bg.dart';
 import 'package:quiz_application/routes/app_routes.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -9,36 +10,41 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Animated "Quiz" text
-            AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  'Quizify',
-                  textStyle: colorizeTextStyle,
-                  colors: colorizeColors,
-                  speed: Duration(milliseconds: 1000),
+      body: Stack(
+        children: [
+          PurpleBackground(),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Animated "Quiz" text
+                AnimatedTextKit(
+                  animatedTexts: [
+                    ColorizeAnimatedText(
+                      'Quizify',
+                      textStyle: colorizeTextStyle,
+                      colors: colorizeColors,
+                      speed: Duration(milliseconds: 500),
+                    ),
+                  ],
+                  totalRepeatCount: 1,
+                  isRepeatingAnimation: false, // This is crucial!
+                  onFinished: () {
+                    Get.offAllNamed(AppRoutes.home);
+                  },
                 ),
               ],
-              totalRepeatCount: 1,
-              isRepeatingAnimation: false, // This is crucial!
-              onFinished: () {
-                Get.offAllNamed(AppRoutes.home);
-              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
 // colors
-const colorizeColors = [Colors.purple, Colors.blue, Colors.yellow, Colors.red];
+const colorizeColors = [Colors.white, Colors.purple, Colors.yellow, Colors.red];
 
 // font style
 const colorizeTextStyle = TextStyle(
